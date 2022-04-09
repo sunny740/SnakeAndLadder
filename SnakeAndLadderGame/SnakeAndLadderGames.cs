@@ -16,23 +16,38 @@ namespace SnakeAndLadderGame
             int diePosition = random.Next(1, 7);
             return diePosition;
         }
-        public void gamePlaying()
+        public void PlayingGames()
         {
-            Random random = new Random();
-            int roll = random.Next(0, 3);
-
-            switch (roll)
+            while (this.position < 100)
             {
-                case NO_PLAY:
-                    this.position += 0;
-                    break;
-                case SNAKE:
-                    this.position -= this.dieRoll();
-                    break;
-                case LADDER:
-                    this.position += this.dieRoll();
-                    break;
+                Random random = new Random();
+                int roll = random.Next(0, 3);
+
+                switch (roll)
+                {
+                    case NO_PLAY:
+                        this.position += 0;
+                        break;
+                    case SNAKE:
+                        this.position -= this.dieRoll();
+                        if (this.position < 0)
+                        {
+                            this.position = 0;
+                        }
+                        break;
+                    case LADDER:
+                        int maxValue = this.dieRoll();
+                        this.position += maxValue;
+                        if (this.position > 100)
+                        {
+                            this.position -= maxValue;
+                        }
+                        break;
+                }
+
             }
+            Console.WriteLine("You Have win with " + this.position + " " + " Number");
+
         }
     }
 }
