@@ -1,14 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 //Console.WriteLine("Hello, World!");
 using System;
-namespace SnakeAndLadderGame
+using SnakeAndLadderGame;
+public class program
 {
-    public class Programm
+    public static void Main(String[] args)
     {
-        public static void Main()
-        {
-            Console.WriteLine("Welcome To SnakeAndLadder Games");
-        }
+        SnakeAndLadderGames game = new SnakeAndLadderGames();
+        int start = game.dieRolls();
+        Console.WriteLine("Welcome in the Game, Your Position is: " + "****" + start + "****");
     }
 }
 
