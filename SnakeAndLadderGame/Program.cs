@@ -7,8 +7,8 @@ public class program
     public static void Main(String[] args)
     {
         SnakeAndLadderGames game = new SnakeAndLadderGames();
-        int start = game.dieRolls();
-        Console.WriteLine("Welcome in the Game, Your Position is: " + "****" + start + "****");
+        int start = game.DieRoll();
+        Console.WriteLine("Welcome in the Game, You got : " + start + "  " + "Position");
     }
 }
 

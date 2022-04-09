@@ -9,9 +9,11 @@ namespace SnakeAndLadderGame
     public class SnakeAndLadderGames
     {
         const int position = 0;
-        public int dieRolls()
+        public int DieRoll()
         {
-            return position;
+            Random random = new Random();
+            int roll = random.Next(1, 7);
+            return roll;
         }
     }
 }
