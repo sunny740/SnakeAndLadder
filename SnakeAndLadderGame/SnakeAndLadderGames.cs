@@ -8,50 +8,104 @@ namespace SnakeAndLadderGame
 {
     public class SnakeAndLadderGames
     {
-        const int NO_PLAY = 0, SNAKE = 1, LADDER = 2;
-        int position = 0;
-        int count = 0;
-        public int DieRolls()
+        public static int No_Play = 1;
+        public static int Ladder = 2;
+        public static int Snake = 3;
+        public static int Win_position = 100;
+        public static int Position_check = 0;
+        public static int Start_Position = 0;
+        
+        public void TwoPlayers()
         {
+            Console.WriteLine("Welcome to SnakeAndLadder program");
+            Boolean player1IsPlaying = true;
+            int player1Position = Start_Position, player2Position = Start_Position, dieRoll, options, dieRolledTimes = 0;
             Random random = new Random();
-            int diePosition = random.Next(1, 7);
-            return diePosition;
-        }
-        public void PlayingGame()
-        {
-            while (this.position < 100)
+            while (player1Position != Win_position && player2Position != Win_position)
             {
-                Random random = new Random();
-                int roll = random.Next(0, 3);
+                dieRoll = random.Next(1, 7);
+                dieRolledTimes++;
+                options = random.Next(1, 4);
 
-                switch (roll)
+                switch (options)
                 {
-                    case NO_PLAY:
-                        this.position += 0;
-                        break;
-                    case SNAKE:
-                        this.position -= this.DieRolls();
-                        if (this.position < 0)
+                    case 1:
+                        if (player1IsPlaying)
                         {
-                            this.position = 0;
+                            player1Position += 0;
+                            player1IsPlaying = false;
+                        }
+                        else
+                        {
+                            player2Position += 0;
+                            player1IsPlaying = true;
                         }
                         break;
-                    case LADDER:
-                        int maxValue = this.DieRolls();
-                        this.position += maxValue;
-                        if (this.position > 100)
+
+                    case 2:
+                        if (player1IsPlaying)
                         {
-                            this.position -= maxValue;
+                            if (player1Position + dieRoll <= Win_position)
+                            {
+
+                                player1Position += dieRoll;
+                                Console.WriteLine("Player 1 landed on a ladder");
+
+                            }
                         }
+                        else
+                        {
+                            if (player2Position + dieRoll <= Win_position)
+                            {
+                                player2Position += dieRoll;
+                                Console.WriteLine("Player 2 landed on a ladder");
+                            }
+                        }
+
+                        break;
+
+                    case 3:
+                        if (player1IsPlaying)
+                        {
+                            player1Position -= dieRoll;
+                            player1IsPlaying = false;
+
+                            if (player1Position < 0)
+                            {
+                                player1Position = 0;
+                            }
+
+                            Console.WriteLine("Player 1 landed on a snake");
+                        }
+                        else
+                        {
+                            player2Position -= dieRoll;
+                            player1IsPlaying = true;
+
+                            if (player2Position < 0)
+                            {
+                                player2Position = 0;
+                            }
+
+                            Console.WriteLine("Player 2 landed on a snake");
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Enter proper value");
                         break;
                 }
-                count++;
-
+                Console.WriteLine("Player 1 position  = " + player1Position);
+                Console.WriteLine("Player 2 position  = " + player2Position);
             }
-            Console.WriteLine("The number of Dice to win the match" + "  " + count);
-            Console.WriteLine("You Have win with " + this.position + " " + " Number");
-
+            if (player1Position == 100)
+            {
+                Console.WriteLine("Player 1 won the game!");
+            }
+            else
+            {
+                Console.WriteLine("Player 2 won the game!");
+            }
+            Console.WriteLine("Dice was rolled " + dieRolledTimes + " to win the game");
         }
-
     }
 }

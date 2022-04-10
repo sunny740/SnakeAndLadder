@@ -7,7 +7,6 @@ public class program
     public static void Main(String[] args)
     {
         SnakeAndLadderGames game = new SnakeAndLadderGames();
-        game.DieRolls();
-        game.PlayingGame();
+        game.TwoPlayers();
     }
 }
