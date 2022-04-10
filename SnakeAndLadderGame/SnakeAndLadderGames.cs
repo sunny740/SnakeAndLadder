@@ -10,13 +10,14 @@ namespace SnakeAndLadderGame
     {
         const int NO_PLAY = 0, SNAKE = 1, LADDER = 2;
         int position = 0;
-        public int dieRoll()
+        int count = 0;
+        public int DieRolls()
         {
             Random random = new Random();
             int diePosition = random.Next(1, 7);
             return diePosition;
         }
-        public void PlayingGames()
+        public void PlayingGame()
         {
             while (this.position < 100)
             {
@@ -29,14 +30,14 @@ namespace SnakeAndLadderGame
                         this.position += 0;
                         break;
                     case SNAKE:
-                        this.position -= this.dieRoll();
+                        this.position -= this.DieRolls();
                         if (this.position < 0)
                         {
                             this.position = 0;
                         }
                         break;
                     case LADDER:
-                        int maxValue = this.dieRoll();
+                        int maxValue = this.DieRolls();
                         this.position += maxValue;
                         if (this.position > 100)
                         {
@@ -44,10 +45,13 @@ namespace SnakeAndLadderGame
                         }
                         break;
                 }
+                count++;
 
             }
+            Console.WriteLine("The number of Dice to win the match" + "  " + count);
             Console.WriteLine("You Have win with " + this.position + " " + " Number");
 
         }
+
     }
 }
